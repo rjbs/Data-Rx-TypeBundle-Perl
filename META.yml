@@ -1,0 +1,11 @@
+--- 
+abstract: experimental / proof of concept Rx types from Moose types
+author: 
+  - Ricardo SIGNES <rjbs@cpan.org>
+generated_by: Dist::Zilla::Plugin::MetaYaml version 0.005
+license: perl
+name: Data-Rx-Type-MooseTC
+requires: 
+  Data::Rx: 0.004
+  Moose: 0.58
+version: 0.002
