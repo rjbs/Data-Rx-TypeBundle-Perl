@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 package Data::Rx::Type::Perl::Obj;
-our $VERSION = '0.001';
 # ABSTRACT: experimental / perl object type
 
 =head1 SYNOPSIS

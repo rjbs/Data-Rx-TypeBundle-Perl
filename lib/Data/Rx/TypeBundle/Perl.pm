@@ -1,7 +1,7 @@
 use strict;
 use warnings;
-package Data::Rx::Type::Perl;
-our $VERSION = '0.001';
+package Data::Rx::TypeBundle::Perl;
+use base 'Data::Rx::TypeBundle';
 # ABSTRACT: experimental / perl types
 
 use Data::Rx::Type::Perl::Obj;
@@ -13,10 +13,7 @@ use Data::Rx::Type::Perl::Obj;
   use Test::More tests => 2;
 
   my $rx = Data::Rx->new({
-    prefix  => {
-      perl => 'tag:codesimply.com,2008:rx/perl/',
-    },
-    type_plugins => [ Data::Rx::Type::Perl->type_plugins ],
+    type_plugins => [ qw(Data::Rx::TypeBundle::Perl) ],
   });
 
   my $isa_rx = $rx->make_schema({
@@ -28,6 +25,12 @@ use Data::Rx::Type::Perl::Obj;
   ok(! $isa_rx->check( 1 ), "1 is not a Data::Rx /perl/obj");
 
 =cut
+
+sub _prefix_pairs {
+  return (
+    perl => 'tag:codesimply.com,2008:rx/perl/',
+  );
+}
 
 sub type_plugins {
   return qw(Data::Rx::Type::Perl::Obj);

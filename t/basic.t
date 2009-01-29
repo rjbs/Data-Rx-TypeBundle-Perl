@@ -1,15 +1,12 @@
 use strict;
 use warnings;
 
-use Data::Rx;
-use Data::Rx::Type::Perl;
+use Data::Rx 0.005;
+use Data::Rx::TypeBundle::Perl;
 use Test::More tests => 2;
 
 my $rx = Data::Rx->new({
-  prefix  => {
-    perl => 'tag:codesimply.com,2008:rx/perl/',
-  },
-  type_plugins => [ Data::Rx::Type::Perl->type_plugins ]
+  type_plugins => [ qw(Data::Rx::TypeBundle::Perl) ]
 });
 
 my $isa_rx = $rx->make_schema({
