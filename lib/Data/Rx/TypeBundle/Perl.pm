@@ -5,6 +5,7 @@ use base 'Data::Rx::TypeBundle';
 # ABSTRACT: experimental / perl types
 
 use Data::Rx::Type::Perl::Obj;
+use Data::Rx::Type::Perl::Code;
 
 =head1 SYNOPSIS
 
@@ -33,7 +34,10 @@ sub _prefix_pairs {
 }
 
 sub type_plugins {
-  return qw(Data::Rx::Type::Perl::Obj);
+  return qw(
+    Data::Rx::Type::Perl::Code
+    Data::Rx::Type::Perl::Obj
+  );
 }
 
 1;

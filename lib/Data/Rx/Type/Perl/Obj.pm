@@ -24,6 +24,11 @@ package Data::Rx::Type::Perl::Obj;
   ok($isa_rx->check($rx),   "a Data::Rx object isa Data::Rx /perl/obj");
   ok(! $isa_rx->check( 1 ), "1 is not a Data::Rx /perl/obj");
 
+=head1 ARGUMENTS
+
+"isa" and "does" ensure that the object passes the relevant test for the
+identifier given.
+
 =cut
 
 use Carp ();
@@ -61,19 +66,3 @@ sub check {
 }
 
 1;
-
-
-=head1 AUTHOR
-
-  Ricardo SIGNES <rjbs@cpan.org>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2009 by Ricardo SIGNES.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as perl itself.
-
-=cut 
-
-
