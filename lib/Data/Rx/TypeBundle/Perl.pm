@@ -4,8 +4,9 @@ package Data::Rx::TypeBundle::Perl;
 use base 'Data::Rx::TypeBundle';
 # ABSTRACT: experimental / perl types
 
-use Data::Rx::Type::Perl::Obj;
 use Data::Rx::Type::Perl::Code;
+use Data::Rx::Type::Perl::Obj;
+use Data::Rx::Type::Perl::Ref;
 
 =head1 SYNOPSIS
 
@@ -37,6 +38,7 @@ sub type_plugins {
   return qw(
     Data::Rx::Type::Perl::Code
     Data::Rx::Type::Perl::Obj
+    Data::Rx::Type::Perl::Ref
   );
 }
 
