@@ -44,7 +44,7 @@ sub guts_from_arg {
   for my $key (keys %$arg) {
     next if $key eq 'isa' or $key eq 'does';
     Carp::croak(
-      "unknown argument $key in constructing " . $class->tag_uri .  "type",
+      "unknown argument $key in constructing " . $class->type_uri .  " type",
     );
   }
 

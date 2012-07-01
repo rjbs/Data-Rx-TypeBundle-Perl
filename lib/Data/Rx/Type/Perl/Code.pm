@@ -43,7 +43,7 @@ sub guts_from_arg {
   for my $key (keys %$arg) {
     next if $key eq 'prototype';
     Carp::croak(
-      "unknown argument $key in constructing " . $class->tag_uri .  "type",
+      "unknown argument $key in constructing " . $class->type_uri .  " type",
     );
   }
 
