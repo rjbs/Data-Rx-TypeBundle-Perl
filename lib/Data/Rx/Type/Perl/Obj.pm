@@ -54,13 +54,35 @@ sub guts_from_arg {
   };
 }
 
-sub check {
+sub assert_valid {
   my ($self, $value) = @_;
 
   local $@;
-  return unless Scalar::Util::blessed($value);
-  return if defined $self->{isa}  and not eval { $value->isa($self->{isa}) };
-  return if defined $self->{does} and not eval { $value->DOES($self->{does}) };
+
+  unless (Scalar::Util::blessed($value)) {
+    $self->fail({
+      error   => [ qw(type) ],
+      message => "found value is not blessed",
+      value   => $value,
+    });
+  }
+
+  if (defined $self->{isa} and not eval { $value->isa($self->{isa}) }) {
+    $self->fail({
+      error   => [ qw(isa) ],
+      message => "found value is not isa $self->{isa}",
+      value   => $value,
+    });
+  }
+
+  if (defined $self->{does} and not eval { $value->DOES($self->{does}) }) {
+    $self->fail({
+      error   => [ qw(does) ],
+      message => "found value does not do role $self->{does}",
+      value   => $value,
+    });
+  }
+
   return 1;
 }
 
