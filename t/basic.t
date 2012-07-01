@@ -126,5 +126,4 @@ ok(! $isa_arr_rx->check([1]), "[1] is not an //arr /perl/obj");
   like($fail->stringify, qr/\$\{\$data/, "stringify has a scalar deref");
 }
 
-
 done_testing;
