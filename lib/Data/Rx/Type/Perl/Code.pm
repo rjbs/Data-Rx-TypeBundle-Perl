@@ -49,7 +49,7 @@ sub guts_from_arg {
 
   my $prototype_schema
     = (! exists $arg->{prototype})
-    ? $rx->make_schema('tag:codesimply.com,2008:rx/core/any')
+    ? undef
 
     : (! defined $arg->{prototype})
     ? $rx->make_schema('tag:codesimply.com,2008:rx/core/nil')
