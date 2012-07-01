@@ -90,4 +90,15 @@ ok(! $isa_rx->check( 1 ), "1 is not a Data::Rx /perl/obj");
   ok(! $is_obj_ref->check( \$bad ), "\\$obj is not a ref to a Test::Object");
 }
 
+my $isa_arr_rx = $rx->make_schema({
+  type     => '//arr',
+  contents => {
+    type => '/perl/obj',
+    isa  => 'Data::Rx',
+  },
+});
+
+ok($isa_arr_rx->check([$rx]), '[$rx] is an //arr of /perl/obj');
+ok(! $isa_arr_rx->check([1]), "[1] is not an //arr /perl/obj");
+
 done_testing;
