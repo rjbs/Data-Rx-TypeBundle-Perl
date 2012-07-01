@@ -90,6 +90,7 @@ sub assert_valid {
       error   => [ qw(prototype) ],
       message => "subroutine prototype does not match requirement",
       value   => $value,
+      # data_path => [[ 'prototype', 'prototype', sub { "prototype($_[0])" } ]],
     });
   }
 
