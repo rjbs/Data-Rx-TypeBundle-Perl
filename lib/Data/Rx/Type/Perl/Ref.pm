@@ -58,14 +58,31 @@ sub guts_from_arg {
   return $guts;
 }
 
-sub check {
+sub assert_valid {
   my ($self, $value) = @_;
 
-  local $@;
+  unless (ref $value and (ref $value eq 'REF' or ref $value eq 'SCALAR')) {
+    $self->fail({
+      error   => [ qw(type) ],
+      message => "found value is not a scalar reference",
+      value   => $value,
+    });
+  }
 
-  return unless ref $value and (ref $value eq 'REF' or ref $value eq 'SCALAR');
-  return 1 unless $self->{referent};
-  return $self->{referent}->check($$value);
+  if ($self->{referent}) {
+    $self->perform_subchecks([
+      [
+        $$value,
+        $self->{referent},
+        {
+          data_path  => [ [ 'scalar_deref', 'deref', sub { "\${$_[0]}" } ] ],
+          check_path => [ [ 'referent', 'key' ] ],
+        },
+      ],
+    ]);
+  }
+
+  return 1;
 }
 
 1;

@@ -62,15 +62,36 @@ sub guts_from_arg {
   return { prototype_schema => $prototype_schema };
 }
 
-sub check {
+sub assert_valid {
   my ($self, $value) = @_;
 
-  return unless ref $value;
+  unless (ref $value) {
+    $self->fail({
+      error   => [ qw(type) ],
+      message => "found value is not a ref",
+      value   => $value,
+    });
+  }
 
   # Should probably be checking _CALLABLE. -- rjbs, 2009-03-12
-  return unless Scalar::Util::reftype($value) eq 'CODE';
+  unless (Scalar::Util::reftype($value) eq 'CODE') {
+    $self->fail({
+      error   => [ qw(type) ],
+      message => "found value is not a CODE ref",
+      value   => $value,
+    });
+  }
 
-  return unless $self->{prototype_schema}->check(prototype $value);
+  if (
+    defined $self->{prototype_schema}
+    && ! $self->{prototype_schema}->check(prototype $value)
+  ) {
+    $self->fail({
+      error   => [ qw(prototype) ],
+      message => "subroutine prototype does not match requirement",
+      value   => $value,
+    });
+  }
 
   return 1;
 }

@@ -65,6 +65,16 @@ ok(! $isa_rx->check( 1 ), "1 is not a Data::Rx /perl/obj");
 }
 
 {
+  my $is_arr_code = $rx->make_schema({
+    type     => '//arr',
+    contents => '/perl/code',
+  });
+
+  ok(  $is_arr_code->check([ sub {} ]), '[sub{}] is //arr of /perl/code');
+  ok(! $is_arr_code->check([ 1      ]), '[1] is not //arr of /perl/code');
+}
+
+{
   my $is_int_ref = $rx->make_schema({
     type      => '/perl/ref',
     referent  => '//int',
@@ -100,5 +110,21 @@ my $isa_arr_rx = $rx->make_schema({
 
 ok($isa_arr_rx->check([$rx]), '[$rx] is an //arr of /perl/obj');
 ok(! $isa_arr_rx->check([1]), "[1] is not an //arr /perl/obj");
+
+{
+  my $arr_intref = $rx->make_schema({
+    type     => '//arr',
+    contents => {
+      type     => '/perl/ref',
+      referent => '//int',
+    },
+  });
+
+  eval { $arr_intref->assert_valid([ \1, \2, \3, \3.2 ]); };
+  my $fail = $@;
+
+  like($fail->stringify, qr/\$\{\$data/, "stringify has a scalar deref");
+}
+
 
 done_testing;
