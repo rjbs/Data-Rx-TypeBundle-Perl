@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package Data::Rx::Type::Perl::Ref;
 # ABSTRACT: experimental / perl reference type
+use parent 'Data::Rx::CommonType::EasyNew';
 
 =head1 SYNOPSIS
 
@@ -35,7 +36,7 @@ use Scalar::Util ();
 
 sub type_uri { 'tag:codesimply.com,2008:rx/perl/ref' }
 
-sub new_checker {
+sub guts_from_arg {
   my ($class, $arg, $rx) = @_;
   $arg ||= {};
 
@@ -46,15 +47,15 @@ sub new_checker {
     );
   }
 
-  my $self = { };
+  my $guts = { };
 
   if ($arg->{referent}) {
     my $ref_checker = $rx->make_schema($arg->{referent});
 
-    $self->{referent} = $ref_checker;
+    $guts->{referent} = $ref_checker;
   }
 
-  return bless $self => $class;
+  return $guts;
 }
 
 sub check {

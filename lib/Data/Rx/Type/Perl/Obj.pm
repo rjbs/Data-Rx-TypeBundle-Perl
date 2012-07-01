@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package Data::Rx::Type::Perl::Obj;
 # ABSTRACT: experimental / perl object type
+use parent 'Data::Rx::CommonType::EasyNew';
 
 =head1 SYNOPSIS
 
@@ -36,8 +37,8 @@ use Scalar::Util ();
 
 sub type_uri { 'tag:codesimply.com,2008:rx/perl/obj' }
 
-sub new_checker {
-  my ($class, $arg, $rx) = @_;
+sub guts_from_arg {
+  my ($class, $arg, $rx, $type) = @_;
   $arg ||= {};
 
   for my $key (keys %$arg) {
@@ -47,12 +48,10 @@ sub new_checker {
     );
   }
 
-  my $self = {
+  return {
     isa  => $arg->{isa},
     does => $arg->{does},
   };
-
-  return bless $self => $class;
 }
 
 sub check {

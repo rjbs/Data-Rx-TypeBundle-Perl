@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package Data::Rx::Type::Perl::Code;
 # ABSTRACT: experimental / perl coderef type
+use parent 'Data::Rx::CommonType::EasyNew';
 
 =head1 SYNOPSIS
 
@@ -35,7 +36,7 @@ use Scalar::Util ();
 
 sub type_uri { 'tag:codesimply.com,2008:rx/perl/code' }
 
-sub new_checker {
+sub guts_from_arg {
   my ($class, $arg, $rx) = @_;
   $arg ||= {};
 
@@ -58,9 +59,7 @@ sub new_checker {
         value => $arg->{prototype}
       });
 
-  my $self = { prototype_schema => $prototype_schema };
-
-  return bless $self => $class;
+  return { prototype_schema => $prototype_schema };
 }
 
 sub check {
