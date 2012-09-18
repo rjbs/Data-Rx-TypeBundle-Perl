@@ -2,6 +2,11 @@ Revision history for Data-Rx-Type-Perl
 
 {{$NEXT}}
 
+0.006     2012-09-18 16:54:25 America/New_York
+          put newer (correct) Data::Rx in prereqs
+
+          get rid of a "local $@" that broke the Obj type on old perls
+
 0.005     2012-09-18 10:55:31 America/New_York
           update for structured failures and Data::Rx 0.200
 
