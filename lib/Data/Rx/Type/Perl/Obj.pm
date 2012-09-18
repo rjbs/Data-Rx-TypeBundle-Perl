@@ -57,8 +57,6 @@ sub guts_from_arg {
 sub assert_valid {
   my ($self, $value) = @_;
 
-  local $@;
-
   unless (Scalar::Util::blessed($value)) {
     $self->fail({
       error   => [ qw(type) ],
