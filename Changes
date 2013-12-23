@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.009     2013-12-22 22:05:12-0500 America/New_York
+          fix dist name
+
 0.008     2013-12-22 21:56:26-0500 America/New_York
           update github links
 
