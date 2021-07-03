@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - update author contact info
+        - add perl version policy
 
 0.009     2013-12-22 22:05:12-0500 America/New_York
           fix dist name
